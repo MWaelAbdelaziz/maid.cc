@@ -2,11 +2,11 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UsersService } from '../services/users.service';
 import { NgOptimizedImage } from '@angular/common';
-
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [NgOptimizedImage],
+  imports: [NgOptimizedImage, RouterLink],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css',
 })
