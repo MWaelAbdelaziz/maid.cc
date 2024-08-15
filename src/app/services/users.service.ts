@@ -10,7 +10,14 @@ const BASE_URL = 'https://reqres.in/api/users';
 export class UsersService {
   private http = inject(HttpClient);
   constructor() {}
-  getUsers(page: number): Observable<UserDetail> {
-    return this.http.get<UserDetail>(`${BASE_URL}?page=${page}`);
+  getUsers(
+    page: number | null = null,
+    id: string | null = null,
+  ): Observable<UserDetail> {
+    if (id == null && page != null) {
+      return this.http.get<UserDetail>(`${BASE_URL}?page=${page}`);
+    } else {
+      return this.http.get<UserDetail>(`${BASE_URL}/${id}`);
+    }
   }
 }

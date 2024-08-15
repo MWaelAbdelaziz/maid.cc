@@ -1,15 +1,15 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
 import { UsersService } from '../services/users.service';
-import { UserDetail } from '../interfaces/user-detail';
 import { UserData } from '../interfaces/user-detail';
-import { NgIf, NgFor, NgOptimizedImage } from '@angular/common';
+import { NgIf, NgFor } from '@angular/common';
 import { NgClass } from '@angular/common';
-import { Router } from '@angular/router';
+import { UserCardComponent } from '../user-card/user-card.component';
+
+import { PaginationComponent } from '../pagination/components/pagination/pagination.component';
 @Component({
   selector: 'app-content',
   standalone: true,
-  imports: [NgOptimizedImage, NgFor, NgIf, NgClass],
+  imports: [NgFor, NgIf, NgClass, PaginationComponent, UserCardComponent],
   templateUrl: './content.component.html',
   styleUrl: './content.component.css',
 })
@@ -17,31 +17,12 @@ export class ContentComponent implements OnInit {
   private usersService = inject(UsersService);
   users: UserData[] = [];
   page: number = 1;
-  showingTo?: number;
-  total?: number;
-  totalPages?: number;
-
-  constructor(private router: Router) {}
+  total: number = 1;
+  totalPages: number = 1;
+  limit: number = 1;
 
   ngOnInit(): void {
     this.loadPosts();
-  }
-  next(): void {
-    this.page++;
-    this.loadPosts();
-  }
-
-  back(): void {
-    if (this.page > 0) {
-      this.page--;
-    }
-    this.loadPosts();
-  }
-
-  navigateToPage(): void {
-    this.router.navigate(['user-page'], {
-      state: { data: 'hi' },
-    });
   }
 
   changePage(page: number): void {
@@ -50,10 +31,10 @@ export class ContentComponent implements OnInit {
   }
 
   loadPosts() {
-    this.usersService.getUsers(this.page).subscribe({
+    this.usersService.getUsers(this.page, null).subscribe({
       next: (users: any) => {
+        this.limit = users.per_page;
         this.users = users.data;
-        this.showingTo = users.per_page;
         this.total = users.per_page * users.total_pages;
         this.totalPages = users.total_pages;
       },

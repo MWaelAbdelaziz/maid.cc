@@ -1,13 +1,29 @@
 <nav class="w-full bg-blue-100 flex bg py-5 justify-between items-center px-36">
   <img
+    class="hover:scale-110 hover:cursor-pointer"
+    (click)="goMainPage()"
     ngSrc="assets/Get-a-full-time-maid-or-a-maid-visa.svg"
-    width="100"
-    height="100"
+    width="150"
+    height="150"
     alt="log"
   />
-  <ul class="list-none sm:flex hidden items-center font-poppins text-black">
-    <li>Contact Us</li>
-    <li class="px-10">Get a Visa</li>
-    <li>Hire a Maid</li>
+  <ul
+    class="list-none text-xl sm:flex hidden items-center font-poppins text-gray-800"
+  >
+    <li class="hover:scale-105 hover:text-black">
+      <a href="https://www.maids.cc/whatsapp-us?nb=nb1">Contact Us</a>
+    </li>
+    <li class="px-10 hover:scale-105 hover:text-black">
+      <a
+        href="https://www.maids.cc/visaservices/?mpanel=&journeyId=f53b7e84-7395-48a4-8820-74a9d1ec0f55"
+        >Get a Visa</a
+      >
+    </li>
+    <li class="hover:scale-105 hover:text-black">
+      <a
+        href="https://www.maids.cc/hire-maid?mpanel=&journeyId=f53b7e84-7395-48a4-8820-74a9d1ec0f55"
+        >Hire a Maid</a
+      >
+    </li>
   </ul>
 </nav>
